@@ -27,7 +27,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
-            android:text="310656"
+            android:text="307947"
             android:textSize="24sp"
             android:textColor="#716B6B"/>
         <Button

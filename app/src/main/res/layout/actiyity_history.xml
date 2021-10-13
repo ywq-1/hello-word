@@ -50,7 +50,7 @@
             android:id="@+id/E_time"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="2021-09-30 23:59:59"
+            android:hint="2021-10-13 23:59:59"
             android:textSize="20sp" />
     </LinearLayout>
     <LinearLayout

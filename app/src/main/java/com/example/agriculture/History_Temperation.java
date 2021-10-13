@@ -31,7 +31,7 @@ public class History_Temperation extends AppCompatActivity {
 
     private LineChart lineChart;
     private NetWorkBusiness netWorkBusiness;
-    private String deviceID = "310656";
+    private String deviceID = "307947";
     private String Pnum;
     private String Time;
 
@@ -62,8 +62,8 @@ public class History_Temperation extends AppCompatActivity {
         xAxis.setTextSize(11);
     }
     private void getTempData() {
-        netWorkBusiness.getSensorData(deviceID, "Temperature", "6", "30", "2021-09-10 00:00:00",
-                "2021-09-30 00:00:00", "DESC", "20", "0", new NCallBack<BaseResponseEntity<SensorDataPageDTO>>() {
+        netWorkBusiness.getSensorData(deviceID, "temperature", "6", "30", "2021-09-10 00:00:00",
+                "2021-10-13 00:00:00", "DESC", "20", "0", new NCallBack<BaseResponseEntity<SensorDataPageDTO>>() {
                     @Override
                     protected void onResponse(BaseResponseEntity<SensorDataPageDTO> response) {
 

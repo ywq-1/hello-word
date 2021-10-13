@@ -45,7 +45,7 @@ public class HistoryActivity extends AppCompatActivity {
     private String E_time;          //结束时间
 
     private NetWorkBusiness netWorkBusiness;
-    private String DeviceID = "310656";        //设备ID
+    private String DeviceID = "307947";        //设备ID
     private String Data;
     private String Time;
 
@@ -118,7 +118,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void getData() {
         netWorkBusiness.getSensorData(DeviceID, "Temperature", "6", "30","2021-09-10 00:00:00",
-                "2021-09-30 00:00:00", "DESC", "20", "0",
+                "2021-10-13 00:00:00", "DESC", "20", "0",
                 new NCallBack<BaseResponseEntity<SensorDataPageDTO>>() {
                     @Override
                     protected void onResponse(BaseResponseEntity<SensorDataPageDTO> response) {

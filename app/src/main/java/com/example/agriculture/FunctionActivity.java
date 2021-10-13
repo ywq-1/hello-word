@@ -71,7 +71,7 @@ public class FunctionActivity extends AppCompatActivity {
     private double temp;
     private NetWorkBusiness netWorkBusiness;
     private String accessToken;
-    private String ID = "310656"; //新大陆连接的设备ID
+    private String ID = "307947"; //新大陆连接的设备ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,54 +122,54 @@ public class FunctionActivity extends AppCompatActivity {
         fan_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"Fan",1);
+                control(ID,"defense1",1);
             }
         });
         fan_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"Fan",0);
+                control(ID,"defense1",0);
             }
         });
         fan_open2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { control(ID,"Fan2",1); }
+            public void onClick(View v) { control(ID,"defense2",1); }
         });
         fan_close2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { control(ID,"Fan2",0); }
+            public void onClick(View v) { control(ID,"defense2",0); }
         });
 
         /**电机正转*/
         electrical_foreward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"nl_steeringengine",1);
+                control(ID,"servo",1);
             }
         });
         electrical_inversion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"nl_steeringengine",-1);
+                control(ID,"servo",-1);
             }
         });
         electrical_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"electrical",0);
+                control(ID,"servo",0);
             }
         });
         /**开关灯*/
         light_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"Light_m",1);
+                control(ID,"light",1);
             }
         });
         light_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"Light_m",0);
+                control(ID,"light",0);
             }
         });
         /**历史记录*/
@@ -188,7 +188,7 @@ public class FunctionActivity extends AppCompatActivity {
         automatic_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                control(ID,"Automatic",1);
+                control(ID,"auto",1);
                 isAuto = true;
                 //线程
                 Thread1 th = new Thread1();
@@ -201,7 +201,7 @@ public class FunctionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 isAuto = false;
-                control(ID,"Automatic",0);
+                control(ID,"auto",0);
             }
         });
     }//onCreate的
@@ -312,7 +312,7 @@ public class FunctionActivity extends AppCompatActivity {
               * 获取温度
               * */
             private void GetTemperature(){
-                netWorkBusiness.getSensor(ID, "Temperature", new NCallBack<BaseResponseEntity<SensorInfo>>() {
+                netWorkBusiness.getSensor(ID, "temperature", new NCallBack<BaseResponseEntity<SensorInfo>>() {
                     @Override
                     public void onResponse(Call<BaseResponseEntity<SensorInfo>> call, Response<BaseResponseEntity<SensorInfo>> response) {
                         BaseResponseEntity baseResponseEntity = response.body();
@@ -384,7 +384,7 @@ public class FunctionActivity extends AppCompatActivity {
              * 获取光照
              * */
             private void GetIlluminance(){
-                netWorkBusiness.getSensor(ID, "light", new NCallBack<BaseResponseEntity<SensorInfo>>() {
+                netWorkBusiness.getSensor(ID, "illumination", new NCallBack<BaseResponseEntity<SensorInfo>>() {
                     @Override
                     public void onResponse(Call<BaseResponseEntity<SensorInfo>> call, Response<BaseResponseEntity<SensorInfo>> response) {
                         BaseResponseEntity baseResponseEntity = response.body();
@@ -399,7 +399,7 @@ public class FunctionActivity extends AppCompatActivity {
                                 resultObj = (JSONObject) jsonObject.get("ResultObj");
                                 String aaa = resultObj.getString("Value");
                                 temp = Double.valueOf(aaa).intValue();
-                                show_illuminance.setText(temp + "Lux");
+                                show_illuminance.setText(temp + "Lx");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -433,25 +433,25 @@ public class FunctionActivity extends AppCompatActivity {
                         int maxL = Double.valueOf(max_L.getText().toString()).intValue();
 
                         if (currentTemp > maxT && isAuto){
-                            control(ID,"Fan",1);
-                            control(ID,"Fan2",1);
+                            control(ID,"defense1",1);
+                            control(ID,"defense2",1);
                         }else if(currentTemp > minT && currentTemp <maxT&&isAuto){
-                            control(ID,"Fan",1);
-                            control(ID,"Fan2",0);
+                            control(ID,"defense1",1);
+                            control(ID,"defense2",0);
                         }else if (currentTemp < minT&&isAuto){
-                            control(ID,"Fan",0);
-                            control(ID,"Fan2",0);
+                            control(ID,"defense1",0);
+                            control(ID,"defense2",0);
                         }
 
                         if (Temp2 > maxL && isAuto){
-                            control(ID,"nl_steeringengine",-1);
-                            control(ID,"Light_m",0);
+                            control(ID,"servo",-1);
+                            control(ID,"light",0);
                         }else if( Temp2 > minL && isAuto){
-                            control(ID,"nl_steeringengine",0);
-                            control(ID,"Light_m",0);
+                            control(ID,"servo",0);
+                            control(ID,"light",0);
                         }else if(Temp2 < minL && isAuto){
-                            control(ID,"nl_steeringengine",1);
-                            control(ID,"Light_m",1);
+                            control(ID,"servo",1);
+                            control(ID,"light",1);
                         }
                         try {
                             Thread.sleep(1000);
